@@ -6,9 +6,13 @@ representing the Pascal’s triangle of n
 
 
 def pascal_triangle(n):
+    """
+    this is a function that returns a pascal
+    is triangle in array form
+    """
     arr = []
     if n <= 0:
-        return arr
+        return []
     for i in range(n):
         temp_arr = []
         for j in range(i + 1):
