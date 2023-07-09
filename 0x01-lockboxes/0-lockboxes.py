@@ -4,14 +4,16 @@
 
 def canUnlockAll(boxes):
     """this a module finds a key to unlock all boxes"""
+    flag = True
     for i in range(len(boxes)):
-        flag = True
-        for j in range(len(boxes[i])):
-            if boxes[i][j] == i:
-                continue
-            if boxes[i][j] == None:
-                return False
-            else:
-                flag = False
-                break
+        for h in range(len(boxes)):
+            for j in range(len(boxes[i])):
+                if boxes[i][j] == h:
+                    flag = True
+                    continue
+                elif boxes[i][j] is None:
+                    return False
+                else:
+                    flag = False
+                    break
     return flag
