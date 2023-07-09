@@ -12,7 +12,7 @@ def canUnlockAll(boxes):
                     flag = True
                     continue
                 elif boxes[i][j] is None:
-                    return False
+                    flag = False
                 else:
                     flag = False
                     break
