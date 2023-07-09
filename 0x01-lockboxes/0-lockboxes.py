@@ -9,6 +9,8 @@ def canUnlockAll(boxes):
         for j in range(len(boxes[i])):
             if boxes[i][j] == i:
                 continue
+            if boxes[i][j] == None:
+                return False
             else:
                 flag = False
                 break
