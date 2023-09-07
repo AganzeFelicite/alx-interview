@@ -54,8 +54,8 @@ def isWinner(x, nums):
         maria = 0
         ben = 0
     if (player_dic['maria'] > player_dic['ben']):
-        return "maria"
+        return "Maria"
     elif (player_dic['maria'] < player_dic['ben']):
-        return "ben"
+        return "Ben"
     else:
         return None
