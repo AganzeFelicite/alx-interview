@@ -1,15 +1,42 @@
 #!/usr/bin/python3
-import random
-import sys
-from time import sleep
-import datetime
+"""Python script that reads stdin line by line and computes metrics"""
 
-for i in range(10000):
-    sleep(random.random())
-    sys.stdout.write("{:d}.{:d}.{:d}.{:d} - [{}] \"GET /projects/260 HTTP/1.1\" {} {}\n".format(
-        random.randint(1, 255), random.randint(1, 255), random.randint(1, 255), random.randint(1, 255),
-        datetime.datetime.now(),
-        random.choice([200, 301, 400, 401, 403, 404, 405, 500]),
-        random.randint(1, 1024)
-    ))
-    sys.stdout.flush()
+import sys
+
+
+def print_n(t_file_size, status):
+    """Prints total file size and status list"""
+    print("File size: {:d}".format(t_file_size))
+    for key, value in sorted(status.items()):
+        if value != 0:
+            print("{}: {}".format(key, value))
+
+
+status = {'200': 0, '301': 0, '400': 0, '401': 0,
+          '403': 0, '404': 0, '405': 0, '500': 0}
+
+t_file_size = 0
+count = 0
+try:
+    for line in sys.stdin:
+        args = line.split()
+
+        if len(args) > 2:
+            status_code = args[-2]
+            file_size = int(args[-1])
+
+            if status_code in status:
+                status[status_code] += 1
+
+            t_file_size += file_size
+            count += 1
+
+            if count == 10:
+                print_n(t_file_size, status)
+                count = 0
+
+except KeyboardInterrupt:
+    pass
+
+finally:
+    print_n(t_file_size, status)
